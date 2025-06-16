@@ -1,5 +1,13 @@
+import ChatWindow from '../chat/ChatWindow';
+import Sidebar from '../sidebar/Sidebar';
+
 function Homepage() {
-  return <div>Home</div>;
+  return (
+    <div className="flex h-screen">
+      <Sidebar />
+      <ChatWindow />
+    </div>
+  );
 }
 
 export default Homepage;

@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import Spinner from './Spinner';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { data: session, isLoading } = useSession();
+  const { session, isLoading } = useSession();
 
   if (isLoading) {
     return <Spinner />;
