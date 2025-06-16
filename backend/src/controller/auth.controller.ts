@@ -89,7 +89,7 @@ export const signin = async (req: Request, res: Response) => {
     res.status(200).cookie('token', token, options).json({
       success: true,
       message: 'User logged in successfully',
-      user,
+      data: user,
     });
   } catch (error) {
     res.status(500).json({
@@ -113,7 +113,7 @@ export const me = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      user,
+      data: user,
     });
   } catch (error) {
     res.status(500).json({
