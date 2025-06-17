@@ -9,7 +9,7 @@ function Sidebar() {
   const setActiveTab = tabStore((state) => state.setActiveTab);
 
   return (
-    <div className="w-sm flex flex-col">
+    <div className="w-sm flex flex-col border-r border-gray-200">
       {/* Header */}
       <div className="p-4 space-y-3">
         <h1 className="text-xl font-medium">Messages</h1>

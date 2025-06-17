@@ -1,8 +1,11 @@
 import { useUser } from '../../hooks/useUser';
 import { tabStore } from '../../store/tabStore';
+import { userStore } from '../../store/userStore';
 
 function UserList() {
   const activeTab = tabStore((state) => state.activeTab);
+  const setSelectedUser = userStore((state) => state.setSelectedUser);
+
   const { data: allUsers } = useUser();
   const displayedUsers = activeTab === 'new chat' ? allUsers?.data : [];
 
@@ -11,6 +14,7 @@ function UserList() {
       {displayedUsers?.map((user) => {
         return (
           <div
+            onClick={() => setSelectedUser(user)}
             key={user._id}
             className="px-4 py-3 flex items-center gap-3 mt-2 cursor-pointer"
           >
