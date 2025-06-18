@@ -5,13 +5,12 @@ interface SocketState {
   content: ContentProps[];
   onlineUsers: string[];
   setContent: (message: ContentProps) => void;
-  setOnlineUsers: (userId: string) => void;
+  setOnlineUsers: (userIds: string[]) => void;
 }
 
 export const socketStore = create<SocketState>((set) => ({
   content: [],
-  onlineUsers: [],
+  onlineUsers: [] as string[],
   setContent: (cnt) => set((state) => ({ content: [...state.content, cnt] })),
-  setOnlineUsers: (userId) =>
-    set((state) => ({ onlineUsers: { ...state.onlineUsers, userId } })),
+  setOnlineUsers: (userIds: string[]) => set({ onlineUsers: userIds }),
 }));

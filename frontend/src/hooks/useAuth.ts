@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { signin, signup } from '../api/auth.api';
+import { signin, signup, logout } from '../api/auth.api';
 import { isAxiosError } from 'axios';
 import { authStore } from '../store/authStore';
 
@@ -33,5 +33,14 @@ export const useAuth = () => {
     },
   });
 
-  return { doSignup, signupError, doSignin, signinError };
+  // Logout
+  const { mutateAsync: doLogout } = useMutation({
+    mutationFn: logout,
+    onSuccess(data) {
+      setCurrUser(null);
+      return data;
+    },
+  });
+
+  return { doSignup, signupError, doSignin, signinError, doLogout };
 };

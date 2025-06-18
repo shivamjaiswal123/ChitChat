@@ -1,12 +1,24 @@
-import { Search } from 'lucide-react';
+import { LogOut, Search } from 'lucide-react';
 import UserList from './UserList';
 import { authStore } from '../../store/authStore';
 import { tabStore } from '../../store/tabStore';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
   const currUser = authStore((state) => state.currUser);
   const activeTab = tabStore((state) => state.activeTab);
   const setActiveTab = tabStore((state) => state.setActiveTab);
+
+  const { doLogout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const res = await doLogout();
+    if (res.success) {
+      navigate('/signin');
+    }
+  };
 
   return (
     <div className="w-sm flex flex-col border-r border-gray-200">
@@ -57,7 +69,7 @@ function Sidebar() {
       </div>
 
       {/* Profile */}
-      <div className="p-4 border-t border-gray-200 bg-white">
+      <div className="p-4 border-t border-gray-200 flex justify-between items-center">
         <div className="flex items-center">
           <div className="size-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-medium"></div>
           <div className="ml-3">
@@ -67,6 +79,10 @@ function Sidebar() {
             <p className="text-xs text-gray-500">Active</p>
           </div>
         </div>
+
+        <button onClick={handleLogout} className="cursor-pointer">
+          {<LogOut />}
+        </button>
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ export const useSocket = () => {
           setContent(parsedData.payload);
           break;
         case 'online-users':
-          setOnlineUsers(parsedData.payload);
+          setOnlineUsers(parsedData.payload.userIds);
           break;
         default:
           console.warn('Unknown message type:', parsedData.type);

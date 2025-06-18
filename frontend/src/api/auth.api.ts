@@ -22,6 +22,12 @@ export const signin = async (
   return res.data;
 };
 
+export const logout = async (): Promise<ApiResponse> => {
+  const res = await axiosInstance.post('api/v1/auth/logout');
+
+  return res.data;
+};
+
 export const me = async (): Promise<ApiResponse<User>> => {
   const res = await axiosInstance.get('api/v1/auth/me');
 

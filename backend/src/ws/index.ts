@@ -69,6 +69,7 @@ export const startWebSocketServer = (http: any) => {
       for (const [userId, socket] of onlineUsers) {
         if (socket === ws) {
           onlineUsers.delete(userId);
+          broadcastOnlineUsers();
           break;
         }
       }
