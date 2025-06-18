@@ -45,7 +45,7 @@ export const startWebSocketServer = (http: any) => {
 
         broadcastOnlineUsers();
       } else {
-        const { receiverId, content } = payload;
+        const { senderId, receiverId, content } = payload;
 
         const receiverSocket = onlineUsers.get(receiverId);
 
@@ -54,6 +54,8 @@ export const startWebSocketServer = (http: any) => {
             JSON.stringify({
               type: 'message',
               payload: {
+                senderId,
+                receiverId,
                 content,
               },
             })

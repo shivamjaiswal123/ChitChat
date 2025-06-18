@@ -1,13 +1,38 @@
 import { Send, Smile } from 'lucide-react';
 import React from 'react';
 import { useState } from 'react';
+import { userStore } from '../../store/userStore';
+import { useSocket } from '../../hooks/useSocket';
+import { authStore } from '../../store/authStore';
+import { socketStore } from '../../store/socketStore';
 
 function MessageInput() {
   const [message, setMessage] = useState('');
 
+  const senderId = authStore((state) => state.currUser?._id);
+  const receiverId = userStore((state) => state.selectedUser?._id);
+  const setContent = socketStore((state) => state.setContent);
+
+  const { sendMessage } = useSocket();
+
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!senderId || !receiverId || !message.trim()) {
+      return;
+    }
 
+    const data = {
+      type: 'message',
+      payload: {
+        senderId,
+        receiverId,
+        content: message,
+      },
+    };
+    sendMessage(data);
+
+    // For showing sent messages to sender also
+    setContent(data.payload);
     setMessage('');
   };
 
@@ -30,7 +55,8 @@ function MessageInput() {
         />
         <button
           type="submit"
-          className="p-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors duration-200 cursor-pointer"
+          disabled={!message.trim()}
+          className={`p-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors duration-200 cursor-pointer disabled:bg-gray-400`}
         >
           <Send size={20} />
         </button>

@@ -24,3 +24,9 @@ export type ApiResponse<T = undefined> = {
   message?: string;
   data?: T;
 };
+
+export interface ContentProps {
+  senderId: string;
+  receiverId: string;
+  content: string;
+}
