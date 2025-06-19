@@ -30,3 +30,10 @@ export interface ContentProps {
   receiverId: string;
   content: string;
 }
+
+export interface ChatHistoryProps {
+  _id: string;
+  senderId: string;
+  receiverId: string;
+  content: string;
+}

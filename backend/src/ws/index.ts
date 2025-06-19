@@ -1,4 +1,5 @@
 import { WebSocketServer, WebSocket } from 'ws';
+import { Message } from '../model/message.model';
 
 const onlineUsers = new Map<string, WebSocket>();
 
@@ -27,7 +28,7 @@ export const startWebSocketServer = (http: any) => {
 
     ws.on('error', console.error);
 
-    ws.on('message', function message(data) {
+    ws.on('message', async function message(data) {
       const { type, payload } = JSON.parse(data.toString());
 
       if (!type || !payload) {
@@ -48,6 +49,13 @@ export const startWebSocketServer = (http: any) => {
         const { senderId, receiverId, content } = payload;
 
         const receiverSocket = onlineUsers.get(receiverId);
+
+        // save to db
+        await Message.create({
+          senderId,
+          receiverId,
+          content,
+        });
 
         if (receiverSocket && receiverSocket.readyState === WebSocket.OPEN) {
           receiverSocket.send(
