@@ -29,14 +29,14 @@ function UserList() {
                 alt={user.name}
               />
 
-              {isOnline && (
-                <span
-                  title={isOnline ? 'Online' : 'Offline'}
-                  className="bg-green-400 rounded-full size-2.5 absolute left-8 bottom-0"
-                />
-              )}
+              <span
+                title={isOnline ? 'Online' : 'Offline'}
+                className={`${
+                  isOnline ? 'bg-green-500' : 'bg-gray-400'
+                } rounded-full size-3 absolute left-8 bottom-0 border-2 border-white`}
+              />
             </div>
-            <div className="font-medium">{user.name}</div>
+            <div className="text-sm font-medium">{user.name}</div>
           </div>
         );
       })}
