@@ -7,9 +7,11 @@ function UserList() {
   const activeTab = tabStore((state) => state.activeTab);
   const setSelectedUser = userStore((state) => state.setSelectedUser);
   const onlineUsers = socketStore((state) => state.onlineUsers);
+  const showLastMessage = activeTab === 'chat';
 
-  const { data: allUsers } = useUser();
-  const displayedUsers = activeTab === 'new chat' ? allUsers?.data : [];
+  const { allUsers, chattedUsers } = useUser();
+  const displayedUsers =
+    activeTab === 'new chat' ? allUsers?.data : chattedUsers?.data;
 
   return (
     <div className="divide-y divide-gray-200">
@@ -36,7 +38,15 @@ function UserList() {
                 } rounded-full size-3 absolute left-8 bottom-0 border-2 border-white`}
               />
             </div>
-            <div className="text-sm font-medium">{user.name}</div>
+            <div className="flex-1 ml-3 min-w-0">
+              <h2 className="text-sm font-medium text-gray-900">{user.name}</h2>
+
+              {showLastMessage && (
+                <p className="text-sm text-gray-500 truncate mt-1">
+                  {user.lastMessage}
+                </p>
+              )}
+            </div>
           </div>
         );
       })}

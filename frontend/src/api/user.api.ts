@@ -16,3 +16,9 @@ export const getMessages = async (
 
   return res.data;
 };
+
+export const getChattedUsers = async (): Promise<ApiResponse<User[]>> => {
+  const res = await axiosInstance.get('/api/v1/user/chatted-users');
+
+  return res.data;
+};

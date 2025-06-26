@@ -16,7 +16,8 @@ export interface SigninFormData {
 export interface User {
   _id: string;
   name: string;
-  email: string;
+  email?: string;
+  lastMessage?: string;
 }
 
 export type ApiResponse<T = undefined> = {
