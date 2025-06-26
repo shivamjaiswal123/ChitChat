@@ -8,14 +8,19 @@ function UserList() {
   const setSelectedUser = userStore((state) => state.setSelectedUser);
   const onlineUsers = socketStore((state) => state.onlineUsers);
   const showLastMessage = activeTab === 'chat';
+  const searchQuery = userStore((state) => state.searchQuery);
 
   const { allUsers, chattedUsers } = useUser();
   const displayedUsers =
     activeTab === 'new chat' ? allUsers?.data : chattedUsers?.data;
 
+  const filteredUsers = displayedUsers?.filter((user) =>
+    user.name.toLocaleLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="divide-y divide-gray-200">
-      {displayedUsers?.map((user) => {
+      {filteredUsers?.map((user) => {
         const isOnline = onlineUsers.includes(user._id);
 
         return (

@@ -4,11 +4,13 @@ import { authStore } from '../../store/authStore';
 import { tabStore } from '../../store/tabStore';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { userStore } from '../../store/userStore';
 
 function Sidebar() {
   const currUser = authStore((state) => state.currUser);
   const activeTab = tabStore((state) => state.activeTab);
   const setActiveTab = tabStore((state) => state.setActiveTab);
+  const setSearchQuery = userStore((state) => state.setSearchQuery);
 
   const { doLogout } = useAuth();
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ function Sidebar() {
           <Search className="absolute left-3 top-3" size={18} />
           <input
             type="text"
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search users"
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
