@@ -51,7 +51,7 @@ function Messages() {
                 cnt.senderId === currUserId
                   ? 'chat-bubble-accent'
                   : 'chat-bubble-neutral'
-              }`}
+              } max-w-lg break-words`}
             >
               {cnt.content}
             </div>

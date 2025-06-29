@@ -74,7 +74,9 @@ function Sidebar() {
       {/* Profile */}
       <div className="p-4 border-t border-gray-200 flex justify-between items-center">
         <div className="flex items-center">
-          <div className="size-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-medium"></div>
+          <div className="size-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-medium">
+            {currUser?.name.split('')[0]}
+          </div>
           <div className="ml-3">
             <p className="text-sm font-medium text-gray-900">
               {currUser?.name}

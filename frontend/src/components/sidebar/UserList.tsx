@@ -2,6 +2,7 @@ import { useUser } from '../../hooks/useUser';
 import { socketStore } from '../../store/socketStore';
 import { tabStore } from '../../store/tabStore';
 import { userStore } from '../../store/userStore';
+import profilePicture from '../../assets/profile-picture.png';
 
 function UserList() {
   const activeTab = tabStore((state) => state.activeTab);
@@ -32,7 +33,7 @@ function UserList() {
             <div className="relative">
               <img
                 className="size-10 rounded-full object-cover"
-                src="https://img.daisyui.com/images/profile/demo/superperson@192.webp"
+                src={profilePicture}
                 alt={user.name}
               />
 

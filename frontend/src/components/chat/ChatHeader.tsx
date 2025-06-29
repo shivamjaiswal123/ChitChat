@@ -1,5 +1,6 @@
 import { socketStore } from '../../store/socketStore';
 import { userStore } from '../../store/userStore';
+import profilePicture from '../../assets/profile-picture.png';
 
 function ChatHeader() {
   const selectedUser = userStore((state) => state.selectedUser);
@@ -12,7 +13,7 @@ function ChatHeader() {
         <div className="relative">
           <img
             className="size-10 rounded-full object-cover"
-            src="https://img.daisyui.com/images/profile/demo/superperson@192.webp"
+            src={profilePicture}
             alt={selectedUser?._id}
           />
 
